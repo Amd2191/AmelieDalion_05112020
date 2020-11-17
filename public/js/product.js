@@ -4,6 +4,7 @@ let url = new URL(currentURL);
 let productId = url.searchParams.get("id");
 console.log("id du produit:" + productId);
 
+
 fetch("http://localhost:3000/api/teddies/" + productId)
     .then(response => {
         console.log(response);
@@ -23,13 +24,8 @@ fetch("http://localhost:3000/api/teddies/" + productId)
         let productTitle = document.createElement("h1");
         let productDescription = document.createElement("p");
         let productPrice = document.createElement("p");
-        let buyButton = document.createElement("a");
         let productConfiguration = document.createElement("select");
-
-        buyButton.addEventListener('click',function(){
-            console.log('added');
-            addToCart();
-        });
+        let buyButton = document.createElement("a");
 
         // Placement
         const productContainer = document.getElementById("product-container");
@@ -49,9 +45,11 @@ fetch("http://localhost:3000/api/teddies/" + productId)
         productImage.setAttribute("alt", "Photo de " + data.name);
         productImage.setAttribute("class", "img-fluid")
         rightColumn.setAttribute("class", "right-column col-6");
-        productConfiguration.setAttribute("class", "form-select mb-4");
+        productConfiguration.setAttribute("class", "form-select mb-4 selectpicker");
         productConfiguration.setAttribute("aria-label", "Choisissez votre couleur");
+        productConfiguration.setAttribute("id", "color");
         buyButton.setAttribute("class", " btn btn-primary add-to-cart");
+        buyButton.setAttribute("id", "buy-button");
 
         // Contents of elements
         productImage.setAttribute("src", data.imageUrl);
@@ -63,37 +61,81 @@ fetch("http://localhost:3000/api/teddies/" + productId)
 
         // Content of form select
         // Get the options from the backend
-        let options=data.colors;
+        let options = data.colors;
         console.log(options);
         // Loop through the array
-        for (var i=0;i<options.length;i++){
-            let opt=options[i];
-            productConfiguration.innerHTML+="<option value="+i+">"+opt+"</option>";
+        for (var i = 0; i < options.length; i++) {
+            let opt = options[i];
+            productConfiguration.innerHTML += "<option value=" + i + ">" + opt + "</option>";
         }
 
         // personnalisation of page title
         let pageTitle = document.getElementById("page-title");
         pageTitle.innerHTML = "Peluche " + data.name;
 
+
+
+        // Collecting the color option chosen
+        var e = document.getElementById("color");
+        e.addEventListener('click', function () {
+            let selectedColor = e.options[e.selectedIndex].text;
+            console.log(selectedColor);
+        });
+        // Enregistrement des produits dans le panier
+        var currentCart = (function () {
+            cart = [];
+
+            function Item(id, color, count) {
+                this.id = id;
+                this.color = color;
+                this.count = count;
+            }
+
+            function savecart() {
+                localStorage.setItem('currentCart', JSON.stringify(cart));
+            }
+
+            function loadcart() {
+                cart = JSON.parse(sessionStorage.getItem('currentCart'));
+            }
+            if (sessionStorage.getItem("currentCart") != null) {
+                savecart();
+            }
+
+            var obj = {};
+
+            obj.addProductToCart = function (id, color, count) {
+                for (var item in cart) {
+                    if (cart[item].id === id && cart[item].color === color) {
+                        cart[item].count++;
+                        savecart();
+                        return;
+                    }
+                }
+
+                var item = new Item(id, color, count);
+                cart.push(item);
+                savecart();
+            }
+
+            obj.setCountForItem = function (id, count) {
+                for (var i in cart) {
+                    if (cart[i].id === id && cart[item].color === color) {
+                        cart[i].count = count;
+                        break;
+                    }
+                }
+            };
+
+            return obj;
+        })();
+        document.getElementById('buy-button').addEventListener('click', async function (event) {
+            event.preventDefault();
+            console.log('Listening to event');
+            var id = productId;
+            var color = e.options[e.selectedIndex].text;
+            currentCart.addProductToCart(id, color, 1);
+
+        })
+
     });
-
-
-// function addToCart(){
-//     for (let i=0, i<Carts.length,i++){
-//         console.log("go go");
-//     }
-// }
-
-//     let carts = document.getElementsByClassName('add-to-cart');
-
-// for (let i=0;i<carts.length;i++){
-//     carts[i].addEventListener('click',()=>{
-//         event.preventDefault();
-//         console.log('added')
-//         cartNumbers()
-//     })
-// }
-// function cartNumbers(){
-//     let numberOfProducts = localStorage.getItem('cartNumbers')
-//     localStorage.setItem('cartNumbers',1);
-// }

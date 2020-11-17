@@ -59,28 +59,16 @@
 
                                     <div class="row mb-4">
                                         <div class="col-md-5 col-lg-3 col-xl-3">
-                                            <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                                                <img class="img-fluid w-100"
-                                                    src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-                                                    alt="Sample">
-                                                <a href="#!">
-                                                    <div class="mask waves-effect waves-light">
-                                                        <!-- <img class="img-fluid w-100"
-                                                            src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"> -->
-                                                        <!-- <div class="mask rgba-black-slight waves-effect waves-light">
-                                                        </div> -->
-                                                    </div>
-                                                </a>
+                                            <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0" id="cart-product-image">
                                             </div>
                                         </div>
                                         <div class="col-md-7 col-lg-9 col-xl-9">
                                             <div>
                                                 <div class="d-flex justify-content-between">
                                                     <div>
-                                                        <h5>Blue denim shirt</h5>
-                                                        <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
-                                                        <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
-                                                        <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                                                        <h5 id="cart-product-title"></h5>
+                                                        <p class="mb-3 text-muted text-uppercase small" id="cart-product-description"></p>
+                                                        <p class="mb-2 text-muted text-uppercase small">Couleur: <span id="cart-product-color-selected"></span></p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -89,7 +77,7 @@
                                                             class="card-link-secondary small text-uppercase mr-3"><i
                                                                 class="fas fa-trash-alt mr-1"></i> Supprimer le produit </a>
                                                     </div>
-                                                    <p class="mb-0"><span><strong>$17.99</strong></span></p>
+                                                    <p class="mb-0" id="cart-product-price"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,11 +109,7 @@
                                             <span>Gratuite</span>
                                         </li>
                                         <li
-                                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                            <div>
-                                                <strong>Montant total</strong>
-                                            </div>
-                                            <span><strong>$53.98</strong></span>
+                                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3" id="total-amount-order">
                                         </li>
                                     </ul>
                                     <form class="row g-3 w-80">
