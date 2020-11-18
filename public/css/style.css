@@ -106,4 +106,12 @@ header.masthead .bg-circle-4 {
   padding-top: 90px;
 }
 
+.cart-img {
+  max-width: 10vw;
+}
+
+.full-width {
+  width: 100%;
+}
+
 /*# sourceMappingURL=style.css.map */

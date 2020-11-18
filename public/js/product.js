@@ -73,8 +73,6 @@ fetch("http://localhost:3000/api/teddies/" + productId)
         let pageTitle = document.getElementById("page-title");
         pageTitle.innerHTML = "Peluche " + data.name;
 
-
-
         // Collecting the color option chosen
         var e = document.getElementById("color");
         e.addEventListener('click', function () {
@@ -82,6 +80,7 @@ fetch("http://localhost:3000/api/teddies/" + productId)
             console.log(selectedColor);
         });
         // Enregistrement des produits dans le panier
+
         var currentCart = (function () {
             cart = [];
 
@@ -90,16 +89,15 @@ fetch("http://localhost:3000/api/teddies/" + productId)
                 this.color = color;
                 this.count = count;
             }
-
             function savecart() {
                 localStorage.setItem('currentCart', JSON.stringify(cart));
             }
 
             function loadcart() {
-                cart = JSON.parse(sessionStorage.getItem('currentCart'));
+                cart = JSON.parse(localStorage.getItem('currentCart'));
             }
-            if (sessionStorage.getItem("currentCart") != null) {
-                savecart();
+            if (localStorage.getItem("currentCart") != null) {
+                loadcart();
             }
 
             var obj = {};
@@ -135,6 +133,7 @@ fetch("http://localhost:3000/api/teddies/" + productId)
             var id = productId;
             var color = e.options[e.selectedIndex].text;
             currentCart.addProductToCart(id, color, 1);
+            alert(data.name+' a bien été rangé dans votre panier');
 
         })
 
