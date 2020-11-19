@@ -114,4 +114,54 @@ header.masthead .bg-circle-4 {
   width: 100%;
 }
 
+.form-control.success input {
+  border-color: #198754;
+}
+
+.form-control.error input {
+  border-color: #ffc107;
+}
+
+.form-control small {
+  color: #ffc107;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.form-control.error small {
+  visibility: visible;
+}
+
+.form-control {
+  padding-bottom: 20px;
+  position: relative;
+  border: none;
+}
+
+.form-control label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.form-control input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px;
+  width: 100%;
+}
+
+.form-control input:focus {
+  outline: 0;
+  border-color: #777;
+}
+
+.form-control.error {
+  justify-content: center;
+}
+
 /*# sourceMappingURL=style.css.map */
