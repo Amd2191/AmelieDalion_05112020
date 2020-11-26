@@ -142,7 +142,6 @@ fetch("http://localhost:3000/api/teddies/" + productId)
             var color = e.options[e.selectedIndex].text;
             var price= data.price/100;
             currentCart.addProductToCart(id, color, price,1);
-            let productCount = 0;
             updateCount();
         })
 
